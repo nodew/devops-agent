@@ -1,6 +1,6 @@
 FROM nodew/builder-base:v1.0.0-podman
 
-ARG JDK_VERSION=1.8.0
+ARG JDK_VERSION=17
 ARG JDK_HOME=/usr/lib/jvm/java-${JDK_VERSION}-openjdk
 
 # java
@@ -27,13 +27,5 @@ RUN cd && \
     rm apache-ant-${ANT_VERSION}-bin.tar.gz
 ENV ANT_HOME /opt/ant
 ENV PATH ${PATH}:/opt/ant/bin
-
-# Set JDK to be 32bit
-COPY set_java $M2
-RUN if [ "x${JAVA_VERSION}" = "x17" ] || [ "x${JAVA_VERSION}" = "x21" ]; then \
-      rm $M2/set_java; \
-    else \
-      $M2/set_java && rm $M2/set_java; \
-    fi
 
 CMD ["mvn","-version"]

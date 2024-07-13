@@ -217,7 +217,7 @@ jobs:
         context: nodejs
         dockerfile: nodejs/podman/Dockerfile
         image-name: builder-nodejs
-        tag-suffix: 18-podman
+        tag-suffix: -18-podman
         platforms: linux/amd64,linux/arm64
         docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
         docker-password: ${{ secrets.DOCKER_HUB_SECRETS }}
