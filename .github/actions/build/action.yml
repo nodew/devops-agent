@@ -58,7 +58,7 @@ runs:
           type=semver,pattern={{version}},prefix=v,suffix=${{ inputs.tag-suffix }}
     - name: Docker meta for Contributors
       id: metaContributors
-      if: github.repository_owner != 'kubesphere'
+      if: github.repository_owner != 'kubesphere' && inputs.ghcr-token != ''
       uses: docker/metadata-action@v3.7.0
       with:
         images: |
@@ -79,7 +79,7 @@ runs:
         username: ${{ inputs.docker-namespace }}
         password: ${{ inputs.docker-password }}
     - name: Login to GHCR
-      if: github.event_name != 'pull_request'
+      if: github.event_name != 'pull_request' && inputs.ghcr-token != ''
       uses: docker/login-action@v1
       with:
         registry: ghcr.io
