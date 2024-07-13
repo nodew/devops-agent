@@ -13,7 +13,7 @@ on:
 
 jobs:
   BuildBase:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
       - name: Build base agent
@@ -30,7 +30,7 @@ jobs:
 
   BuildGo:
     needs: BuildBase
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
     - name: Build Go agent
@@ -44,62 +44,62 @@ jobs:
         docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
         docker-password: ${{ secrets.DOCKER_HUB_SECRETS }}
         ghcr-token: ${{ secrets.GHCR_TOKEN }}
-        build-args: "GOLANG_VERSION=1.12.10"
-  BuildGo16:
+        build-args: "GOLANG_VERSION=1.22.5"
+  BuildGo20:
     needs: BuildBase
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
-    - name: Build Go 1.16 agent
+    - name: Build Go 1.20 agent
       uses: ./.github/actions/build
       with:
         context: go
         dockerfile: go/podman/Dockerfile
         image-name: builder-go
-        tag-suffix: -1.16-podman
+        tag-suffix: -1.20-podman
         platforms: linux/amd64,linux/arm64
         docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
         docker-password: ${{ secrets.DOCKER_HUB_SECRETS }}
         ghcr-token: ${{ secrets.GHCR_TOKEN }}
-        build-args: "GOLANG_VERSION=1.16.8"
-  BuildGo17:
+        build-args: "GOLANG_VERSION=1.20.14"
+  BuildGo21:
     needs: BuildBase
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
-    - name: Build Go 1.17 agent
+    - name: Build Go 1.21 agent
       uses: ./.github/actions/build
       with:
         context: go
         dockerfile: go/podman/Dockerfile
         image-name: builder-go
-        tag-suffix: -1.17-podman
+        tag-suffix: -1.21-podman
         platforms: linux/amd64,linux/arm64
         docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
         docker-password: ${{ secrets.DOCKER_HUB_SECRETS }}
         ghcr-token: ${{ secrets.GHCR_TOKEN }}
-        build-args: "GOLANG_VERSION=1.17.8"
-  BuildGo18:
+        build-args: "GOLANG_VERSION=1.21.12"
+  BuildGo22:
     needs: BuildBase
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
-    - name: Build Go 1.18 agent
+    - name: Build Go 1.22 agent
       uses: ./.github/actions/build
       with:
         context: go
         dockerfile: go/podman/Dockerfile
         image-name: builder-go
-        tag-suffix: -1.18-podman
+        tag-suffix: -1.22-podman
         platforms: linux/amd64,linux/arm64
         docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
         docker-password: ${{ secrets.DOCKER_HUB_SECRETS }}
         ghcr-token: ${{ secrets.GHCR_TOKEN }}
-        build-args: "GOLANG_VERSION=1.18"
+        build-args: "GOLANG_VERSION=1.22.5"
 
   BuildMaven:
     needs: BuildBase
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
     - name: Build maven agent
@@ -113,10 +113,12 @@ jobs:
         docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
         docker-password: ${{ secrets.DOCKER_HUB_SECRETS }}
         ghcr-token: ${{ secrets.GHCR_TOKEN }}
-        build-args: "JDK_VERSION=1.8.0"
+        build-args: |
+          "JDK_VERSION=17"
+          "JDK_HOME=/usr/java/default"
   BuildMavenJDK11:
     needs: BuildBase
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
     - name: Build maven(JDK11) agent
@@ -131,10 +133,9 @@ jobs:
         docker-password: ${{ secrets.DOCKER_HUB_SECRETS }}
         ghcr-token: ${{ secrets.GHCR_TOKEN }}
         build-args: "JDK_VERSION=11"
-
   BuildMavenJDK17:
     needs: BuildBase
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v2
       - name: Build maven(JDK17) agent
@@ -151,10 +152,29 @@ jobs:
           build-args: |
             "JDK_VERSION=17"
             "JDK_HOME=/usr/java/default"
+  BuildMavenJDK21:
+    needs: BuildBase
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build maven(JDK21) agent
+        uses: ./.github/actions/build
+        with:
+          context: maven
+          dockerfile: maven/podman/Dockerfile
+          image-name: builder-maven
+          tag-suffix: -jdk21-podman
+          platforms: linux/amd64,linux/arm64
+          docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
+          docker-password: ${{ secrets.DOCKER_HUB_SECRETS }}
+          ghcr-token: ${{ secrets.GHCR_TOKEN }}
+          build-args: |
+            "JDK_VERSION=21"
+            "JDK_HOME=/usr/java/default"
 
   BuildGradle:
     needs: BuildBase
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
     - name: Build Gradle agent
@@ -171,7 +191,7 @@ jobs:
 
   BuildNodeJs:
     needs: BuildBase
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
     - name: Build NodeJS agent
@@ -185,10 +205,97 @@ jobs:
         docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
         docker-password: ${{ secrets.DOCKER_HUB_SECRETS }}
         ghcr-token: ${{ secrets.GHCR_TOKEN }}
+        build-args: "NODE_VERSION=20.15.1"
+  BuildNodeJs18:
+    needs: BuildBase
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build NodeJS 18 LTS agent
+      uses: ./.github/actions/build
+      with:
+        context: nodejs
+        dockerfile: nodejs/podman/Dockerfile
+        image-name: builder-nodejs
+        tag-suffix: 18-podman
+        platforms: linux/amd64,linux/arm64
+        docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
+        docker-password: ${{ secrets.DOCKER_HUB_SECRETS }}
+        ghcr-token: ${{ secrets.GHCR_TOKEN }}
+        build-args: "NODE_VERSION=18.18.1"
+  BuildNodeJs20:
+    needs: BuildBase
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build NodeJS 20 LTS agent
+      uses: ./.github/actions/build
+      with:
+        context: nodejs
+        dockerfile: nodejs/podman/Dockerfile
+        image-name: builder-nodejs
+        tag-suffix: -20-podman
+        platforms: linux/amd64,linux/arm64
+        docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
+        docker-password: ${{ secrets.DOCKER_HUB_SECRETS }}
+        ghcr-token: ${{ secrets.GHCR_TOKEN }}
+        build-args: "NODE_VERSION=20.15.1"
+
+  BuildDotnet:
+    needs: BuildBase
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build DotNet agent
+      uses: ./.github/actions/build
+      with:
+        context: dotnet
+        dockerfile: dotnet/podman/Dockerfile
+        image-name: builder-dotnet
+        tag-suffix: -podman
+        platforms: linux/amd64,linux/arm64
+        docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
+        docker-password: ${{ secrets.DOCKER_HUB_SECRETS }}
+        ghcr-token: ${{ secrets.GHCR_TOKEN }}
+        build-args: "DOTNET_VERSION=8.0"
+  BuildDotnet6:
+    needs: BuildBase
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build DotNet 6.0 agent
+      uses: ./.github/actions/build
+      with:
+        context: dotnet
+        dockerfile: dotnet/podman/Dockerfile
+        image-name: builder-dotnet
+        tag-suffix: -6-podman
+        platforms: linux/amd64,linux/arm64
+        docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
+        docker-password: ${{ secrets.DOCKER_HUB_SECRETS }}
+        ghcr-token: ${{ secrets.GHCR_TOKEN }}
+        build-args: "DOTNET_VERSION=6.0"
+  BuildDotnet8:
+    needs: BuildBase
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build DotNet 8.0 agent
+      uses: ./.github/actions/build
+      with:
+        context: dotnet
+        dockerfile: dotnet/podman/Dockerfile
+        image-name: builder-dotnet
+        tag-suffix: -8-podman
+        platforms: linux/amd64,linux/arm64
+        docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
+        docker-password: ${{ secrets.DOCKER_HUB_SECRETS }}
+        ghcr-token: ${{ secrets.GHCR_TOKEN }}
+        build-args: "DOTNET_VERSION=8.0"
 
   BuildPython:
     needs: BuildBase
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v2
     - name: Build Python agent

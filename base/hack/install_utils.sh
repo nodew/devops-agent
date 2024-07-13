@@ -6,7 +6,7 @@ echo $ARCH
 
 if [[ ${EXCLUDE_DOCKER} != '1' ]]; then
   # Docker
-  DOCKER_VERSION=18.09.9
+  DOCKER_VERSION=20.10.24
   if [[ ${ARCH} == 'x86_64' ]]; then
     curl -f https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_VERSION.tgz | tar xvz && \
     mv docker/docker /usr/bin/ && \
@@ -24,7 +24,7 @@ fi
 
 # Helm
 HELM_VERSION=2.11.0
-HELM3_VERSIOIN=3.5.0
+HELM3_VERSIOIN=3.14.2
 
 if [[ ${ARCH} == 'x86_64' ]]; then
   curl -f https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz  | tar xzv && \
@@ -34,7 +34,7 @@ if [[ ${ARCH} == 'x86_64' ]]; then
 
   curl -f https://get.helm.sh/helm-v${HELM3_VERSIOIN}-linux-amd64.tar.gz | tar xzv && \
   mv linux-amd64/helm /usr/bin/helm3 && \
-  rm -rf linux-amd64 
+  rm -rf linux-amd64
 elif [[ ${ARCH} == 'aarch64' ]]
 then
   curl -f https://get.helm.sh/helm-v${HELM_VERSION}-linux-arm64.tar.gz  | tar xzv && \
@@ -44,7 +44,7 @@ then
 
   curl -f https://get.helm.sh/helm-v${HELM3_VERSIOIN}-linux-arm64.tar.gz | tar xzv && \
   mv linux-arm64/helm /usr/bin/helm3 && \
-  rm -rf linux-arm64 
+  rm -rf linux-arm64
 else
   echo "do not support this arch"
   exit 1
@@ -67,7 +67,7 @@ else
 fi
 
 # ks
-KS_VERSION=0.0.64
+KS_VERSION=0.0.71
 if [[ ${ARCH} == 'x86_64' ]]; then
   curl -fL https://github.com/kubesphere-sigs/ks/releases/download/v${KS_VERSION}/ks-linux-amd64.tar.gz | tar xzv && \
   mv ks /usr/bin/
@@ -81,7 +81,7 @@ else
 fi
 
 # kustomize
-KUSTOMIZE_VERSION=4.5.3
+KUSTOMIZE_VERSION=5.4.2
 if [[ ${ARCH} == 'x86_64' ]]; then
   curl -fL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz | tar xzv && \
   mv kustomize /usr/bin/

@@ -1,6 +1,9 @@
-FROM kubespheredev/builder-base:v3.1.0-podman
+FROM nodew/builder-base:v1.0.0-podman
 
-ENV NODE_VERSION 10.16.3
+ARG NODE_VERSION=20.15.1
+ARG NEW_COREPACK
+ENV NODE_VERSION $NODE_VERSION
+ENV NEW_COREPACK $NEW_COREPACK
 
 RUN ARCH= && uArch="$(uname -m)" \
   && case "${uArch##*-}" in \
@@ -31,13 +34,14 @@ RUN ARCH= && uArch="$(uname -m)" \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs \
   && yum install -y nodejs gcc-c++ make bzip2 GConf2 gtk2 chromedriver chromium xorg-x11-server-Xvfb
 
-RUN npm -g config set user root
-RUN npm i -g watch-cli vsce typescript
+RUN corepack enable
 
-# Yarn
-ENV YARN_VERSION 1.16.0
-RUN curl -f -L -o /tmp/yarn.tgz https://github.com/yarnpkg/yarn/releases/download/v${YARN_VERSION}/yarn-v${YARN_VERSION}.tar.gz && \
-	tar xf /tmp/yarn.tgz && \
-	mv yarn-v${YARN_VERSION} /opt/yarn && \
-	ln -s /opt/yarn/bin/yarn /usr/local/bin/yarn && \
-	yarn config set cache-folder /root/.yarn
+RUN if [ -n "$NEW_COREPACK" ]; then \
+        corepack install --global pnpm@latest; \
+        corepack install --global yarn@stable; \
+    else \
+        corepack prepare pnpm@latest --activate; \
+        corepack prepare yarn@stable --activate; \
+    fi
+
+CMD [ "node", "--version" ]

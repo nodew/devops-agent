@@ -1,7 +1,7 @@
-FROM kubespheredev/builder-base:v3.1.0-podman
+FROM nodew/builder-base:v1.0.0-podman
 
-# gradle6
-ENV GRADLE_VERSION=6.9.1
+# gradle
+ENV GRADLE_VERSION=8.9
 ENV GRADLE_HOME /usr/local/gradle-${GRADLE_VERSION}
 ENV PATH ${GRADLE_HOME}/bin:$PATH
 
