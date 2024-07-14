@@ -1,4 +1,4 @@
-FROM nodew/builder-base:v1.0.0
+FROM nodew/builder-base:v1.0.0-docker
 
 # python3
 ENV PYTHON_VERSION 3.12.4

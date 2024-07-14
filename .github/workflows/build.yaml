@@ -20,7 +20,7 @@ jobs:
         uses: ./.github/actions/build
         with:
           context: base
-          dockerfile: base/Dockerfile
+          dockerfile: base/podman/Dockerfile
           image-name: builder-base
           platforms: linux/amd64,linux/arm64
           docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
@@ -36,7 +36,7 @@ jobs:
       uses: ./.github/actions/build
       with:
         context: go
-        dockerfile: go/Dockerfile
+        dockerfile: go/podman/Dockerfile
         image-name: builder-go
         platforms: linux/amd64,linux/arm64
         docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
@@ -52,7 +52,7 @@ jobs:
       uses: ./.github/actions/build
       with:
         context: go
-        dockerfile: go/Dockerfile
+        dockerfile: go/podman/Dockerfile
         image-name: builder-go
         tag-suffix: -1.20
         platforms: linux/amd64,linux/arm64
@@ -69,7 +69,7 @@ jobs:
       uses: ./.github/actions/build
       with:
         context: go
-        dockerfile: go/Dockerfile
+        dockerfile: go/podman/Dockerfile
         image-name: builder-go
         tag-suffix: -1.21
         platforms: linux/amd64,linux/arm64
@@ -86,7 +86,7 @@ jobs:
       uses: ./.github/actions/build
       with:
         context: go
-        dockerfile: go/Dockerfile
+        dockerfile: go/podman/Dockerfile
         image-name: builder-go
         tag-suffix: -1.22
         platforms: linux/amd64,linux/arm64
@@ -104,7 +104,7 @@ jobs:
       uses: ./.github/actions/build
       with:
         context: maven
-        dockerfile: maven/Dockerfile
+        dockerfile: maven/podman/Dockerfile
         image-name: builder-maven
         platforms: linux/amd64,linux/arm64
         docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
@@ -122,7 +122,7 @@ jobs:
       uses: ./.github/actions/build
       with:
         context: maven
-        dockerfile: maven/Dockerfile
+        dockerfile: maven/podman/Dockerfile
         image-name: builder-maven
         tag-suffix: -jdk11
         platforms: linux/amd64,linux/arm64
@@ -139,7 +139,7 @@ jobs:
         uses: ./.github/actions/build
         with:
           context: maven
-          dockerfile: maven/Dockerfile
+          dockerfile: maven/podman/Dockerfile
           image-name: builder-maven
           tag-suffix: -jdk17
           platforms: linux/amd64,linux/arm64
@@ -158,7 +158,7 @@ jobs:
         uses: ./.github/actions/build
         with:
           context: maven
-          dockerfile: maven/Dockerfile
+          dockerfile: maven/podman/Dockerfile
           image-name: builder-maven
           tag-suffix: -jdk21
           platforms: linux/amd64,linux/arm64
@@ -178,7 +178,7 @@ jobs:
       uses: ./.github/actions/build
       with:
         context: gradle
-        dockerfile: gradle/Dockerfile
+        dockerfile: gradle/podman/Dockerfile
         image-name: builder-gradle
         platforms: linux/amd64,linux/arm64
         docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
@@ -194,7 +194,7 @@ jobs:
       uses: ./.github/actions/build
       with:
         context: nodejs
-        dockerfile: nodejs/Dockerfile
+        dockerfile: nodejs/podman/Dockerfile
         image-name: builder-nodejs
         platforms: linux/amd64,linux/arm64
         docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
@@ -212,7 +212,7 @@ jobs:
       uses: ./.github/actions/build
       with:
         context: nodejs
-        dockerfile: nodejs/Dockerfile
+        dockerfile: nodejs/podman/Dockerfile
         image-name: builder-nodejs
         tag-suffix: -18
         platforms: linux/amd64,linux/arm64
@@ -229,7 +229,7 @@ jobs:
       uses: ./.github/actions/build
       with:
         context: nodejs
-        dockerfile: nodejs/Dockerfile
+        dockerfile: nodejs/podman/Dockerfile
         image-name: builder-nodejs
         tag-suffix: -20
         platforms: linux/amd64,linux/arm64
@@ -249,7 +249,7 @@ jobs:
       uses: ./.github/actions/build
       with:
         context: dotnet
-        dockerfile: dotnet/Dockerfile
+        dockerfile: dotnet/podman/Dockerfile
         image-name: builder-dotnet
         platforms: linux/amd64,linux/arm64
         docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
@@ -265,9 +265,9 @@ jobs:
       uses: ./.github/actions/build
       with:
         context: dotnet
-        dockerfile: dotnet/Dockerfile
+        dockerfile: dotnet/podman/Dockerfile
         image-name: builder-dotnet
-        tag-suffix: -6
+        tag-suffix: -6.0
         platforms: linux/amd64,linux/arm64
         docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
         docker-password: ${{ secrets.DOCKER_HUB_SECRETS }}
@@ -282,9 +282,9 @@ jobs:
       uses: ./.github/actions/build
       with:
         context: dotnet
-        dockerfile: dotnet/Dockerfile
+        dockerfile: dotnet/podman/Dockerfile
         image-name: builder-dotnet
-        tag-suffix: -8
+        tag-suffix: -8.0
         platforms: linux/amd64,linux/arm64
         docker-namespace: ${{ secrets.DOCKER_HUB_USER }}
         docker-password: ${{ secrets.DOCKER_HUB_SECRETS }}
@@ -300,7 +300,7 @@ jobs:
       uses: ./.github/actions/build
       with:
         context: python
-        dockerfile: python/Dockerfile
+        dockerfile: python/podman/Dockerfile
         image-name: builder-python
         platforms: linux/amd64,linux/arm64
         docker-namespace: ${{ secrets.DOCKER_HUB_USER }}

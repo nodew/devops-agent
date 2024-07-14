@@ -1,4 +1,4 @@
-FROM nodew/builder-base:v1.0.0-podman
+FROM nodew/builder-base:v1.0.0
 
 # python3
 ENV PYTHON_VERSION=3.12.4
@@ -9,7 +9,7 @@ RUN curl -fSL https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHO
 
 RUN cd /usr/src/Python-${PYTHON_VERSION} && \
     ./configure --enable-optimizations --with-ensurepip=install --enable-loadable-sqlite-extensions && \
-    make -j 2 && make -j 2 altinstall
+    make -j $(nproc) && make -j $(nproc) altinstall
 
 RUN cd ../ && \
     rm -rf /usr/src/Python-${PYTHON_VERSION}.tgz /usr/src/Python-${PYTHON_VERSION} && \

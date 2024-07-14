@@ -1,4 +1,4 @@
-FROM nodew/builder-base:v1.0.0-podman
+FROM nodew/builder-base:v1.0.0
 
 ARG NODE_VERSION=20.15.1
 ARG NEW_COREPACK

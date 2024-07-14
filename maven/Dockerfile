@@ -1,4 +1,4 @@
-FROM nodew/builder-base:v1.0.0
+FROM nodew/builder-base:v1.0.0-docker
 
 ARG JDK_VERSION=17
 ARG JDK_HOME=/usr/lib/jvm/java-${JDK_VERSION}-openjdk

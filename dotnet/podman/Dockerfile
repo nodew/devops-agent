@@ -1,4 +1,4 @@
-FROM nodew/builder-base:v1.0.0-podman
+FROM nodew/builder-base:v1.0.0
 
 ARG DOTNET_VERSION=8.0
 ENV DOTNET_VERSION $DOTNET_VERSION

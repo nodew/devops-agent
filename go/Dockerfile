@@ -1,4 +1,4 @@
-FROM nodew/builder-base:v1.0.0
+FROM nodew/builder-base:v1.0.0-docker
 
 RUN yum -y groupinstall 'Development Tools'  && yum -y clean all --enablerepo='*'
 

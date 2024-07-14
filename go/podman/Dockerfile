@@ -1,4 +1,4 @@
-FROM nodew/builder-base:v1.0.0-podman
+FROM nodew/builder-base:v1.0.0
 
 RUN yum -y groupinstall 'Development Tools'  && yum -y clean all --enablerepo='*'
 

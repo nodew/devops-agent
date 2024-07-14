@@ -1,4 +1,4 @@
-FROM nodew/builder-base:v1.0.0
+FROM nodew/builder-base:v1.0.0-docker
 
 # java
 # ENV JAVA_VERSIOIN 21
